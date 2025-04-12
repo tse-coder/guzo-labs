@@ -65,7 +65,7 @@ const discountTypes = [
   { type: 'Services', min: 10, max: 35 },
   { type: 'Events', min: 15, max: 40 },
   { type: 'Spa', min: 10, max: 30 },
-  { type: 'Golf', min: 5, max: 20 }
+  { type: 'Rooms', min: 5, max: 20 }
 ];
 
 // Generate a single member
