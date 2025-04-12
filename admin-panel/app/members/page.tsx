@@ -15,7 +15,7 @@ const Members = () => {
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
 
   const filteredMembers = useMemo(() => {
-    let result = members.filter((member) =>
+    const result = members.filter((member) =>
       member.userInfo.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       member.userInfo.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       member.id.toLowerCase().includes(searchTerm.toLowerCase()) ||

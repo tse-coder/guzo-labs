@@ -34,7 +34,7 @@ const AIAssistant = () => {
       ];
       setMessages(initialMessages);
     }
-  }, [isOpen]);
+  }, [isOpen, messages.length, commonQuestions]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });

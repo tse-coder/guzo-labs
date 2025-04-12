@@ -4,11 +4,15 @@ import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import AIAssistant from "@/components/AIAssistant";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
-  title: "Resort Admin Dashboard",
-  description: "Admin dashboard for managing resort members and subscriptions",
+  title: "Kuriftu Admin Dashboard",
+  description: "Admin dashboard for managing resort's members and subscriptions",
 };
 
 export default function RootLayout({
@@ -17,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -33,7 +37,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100`}>
+      <body className="font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
         <ThemeProvider>
           {children}
           <AIAssistant />
