@@ -1,0 +1,75 @@
+<!-- MembersPage Component -->
+<!-- Purpose: Displays member information and management -->
+<% page = 'members' %>
+
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="flex justify-between items-center">
+        <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Members Management</h2>
+        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+            <i class="fas fa-plus mr-2"></i>Add New Member
+        </button>
+    </div>
+
+    <!-- Members Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% members.forEach(member => { %>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                <!-- Member Header -->
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white"><%= member.userInfo.fullName %></h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">ID: <%= member.id %></p>
+                    </div>
+                    <span class="px-3 py-1 rounded-full text-sm font-medium
+                        <%= member.membershipType === 'Lifetime' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' :
+                           member.membershipType === 'Premium' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                           'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200' %>">
+                        <%= member.membershipType %>
+                    </span>
+                </div>
+
+                <!-- Member Details -->
+                <div class="space-y-4">
+                    <div class="flex items-center text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-envelope mr-2"></i>
+                        <span><%= member.userInfo.email %></span>
+                    </div>
+                    
+                    <div class="flex items-center text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-star mr-2"></i>
+                        <span><%= member.points %> Points</span>
+                    </div>
+
+                    <div class="flex items-center text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-calendar mr-2"></i>
+                        <span>Member since <%= new Date(member.userInfo.subscriptionStartDate).toLocaleDateString() %></span>
+                    </div>
+
+                    <!-- Package Info -->
+                    <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+                        <h4 class="font-medium text-gray-900 dark:text-white mb-2">Package Benefits</h4>
+                        <div class="space-y-2">
+                            <% member.packageInfo.discounts.forEach(discount => { %>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-600 dark:text-gray-300"><%= discount.discountType %></span>
+                                    <span class="font-medium text-gray-900 dark:text-white"><%= discount.discountAmount %>% off</span>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex space-x-2 pt-4">
+                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-3 py-2 rounded-lg text-sm">
+                            <i class="fas fa-edit mr-1"></i> Edit
+                        </button>
+                        <button class="flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-3 py-2 rounded-lg text-sm">
+                            <i class="fas fa-trash mr-1"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div> 
