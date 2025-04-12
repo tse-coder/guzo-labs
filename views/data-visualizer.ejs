@@ -1,0 +1,193 @@
+<!-- DataVisualizerPage Component -->
+<!-- Purpose: Displays data visualization and analytics -->
+<% page = 'data-visualizer' %>
+
+<div class="space-y-6">
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- User Growth Chart -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">User Growth</h3>
+            <canvas id="userGrowthChart" class="w-full h-64"></canvas>
+        </div>
+
+        <!-- Points Distribution Chart -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Points Distribution</h3>
+            <canvas id="pointsDistributionChart" class="w-full h-64"></canvas>
+        </div>
+
+        <!-- Reward Redemption Chart -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Reward Redemptions</h3>
+            <canvas id="rewardRedemptionChart" class="w-full h-64"></canvas>
+        </div>
+
+        <!-- Engagement Metrics Chart -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Engagement Metrics</h3>
+            <canvas id="engagementChart" class="w-full h-64"></canvas>
+        </div>
+    </div>
+
+    <!-- Analytics Summary -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">User Activity</h3>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700 dark:text-gray-300">Active Users</span>
+                    <span class="font-semibold">3</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700 dark:text-gray-300">New Users (30d)</span>
+                    <span class="font-semibold">2</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700 dark:text-gray-300">Avg. Session Time</span>
+                    <span class="font-semibold">5m 23s</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Points Activity</h3>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700 dark:text-gray-300">Total Points Issued</span>
+                    <span class="font-semibold">650</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700 dark:text-gray-300">Points Redeemed</span>
+                    <span class="font-semibold">245</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700 dark:text-gray-300">Avg. Points/User</span>
+                    <span class="font-semibold">217</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Reward Performance</h3>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700 dark:text-gray-300">Total Rewards</span>
+                    <span class="font-semibold">6</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700 dark:text-gray-300">Redemption Rate</span>
+                    <span class="font-semibold">85%</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span class="text-gray-700 dark:text-gray-300">Most Popular</span>
+                    <span class="font-semibold">Free Coffee</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // User Growth Chart
+    const userGrowthCtx = document.getElementById('userGrowthChart').getContext('2d');
+    new Chart(userGrowthCtx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'New Users',
+                data: [0, 1, 1, 0, 1, 0],
+                borderColor: 'rgb(59, 130, 246)',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    // Points Distribution Chart
+    const pointsDistributionCtx = document.getElementById('pointsDistributionChart').getContext('2d');
+    new Chart(pointsDistributionCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['0-100', '101-500', '501-1000', '1000+'],
+            datasets: [{
+                data: [1, 1, 1, 0],
+                backgroundColor: [
+                    'rgb(59, 130, 246)',
+                    'rgb(16, 185, 129)',
+                    'rgb(245, 158, 11)',
+                    'rgb(239, 68, 68)'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    // Reward Redemption Chart
+    const rewardRedemptionCtx = document.getElementById('rewardRedemptionChart').getContext('2d');
+    new Chart(rewardRedemptionCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Free Coffee', '10% Discount', 'VIP Access'],
+            datasets: [{
+                label: 'Redemptions',
+                data: [120, 85, 40],
+                backgroundColor: 'rgb(16, 185, 129)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    // Engagement Chart
+    const engagementCtx = document.getElementById('engagementChart').getContext('2d');
+    new Chart(engagementCtx, {
+        type: 'radar',
+        data: {
+            labels: ['App Usage', 'Points Earned', 'Rewards Redeemed', 'Social Sharing', 'Feedback'],
+            datasets: [{
+                label: 'Engagement Score',
+                data: [85, 90, 75, 60, 80],
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                borderColor: 'rgb(59, 130, 246)',
+                pointBackgroundColor: 'rgb(59, 130, 246)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+</script>
